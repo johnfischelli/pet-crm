@@ -13,3 +13,4 @@
 
 Route::get('/', ['uses' => 'Controller@home', 'as' => 'loadCustomer']);
 Route::post('/', ['uses' => 'Controller@saveCustomer', 'as' => 'saveCustomer']);
+Route::post('/appointment/delete', ['uses' => 'Controller@deleteAppointment', 'as' => 'deleteAppointment']);

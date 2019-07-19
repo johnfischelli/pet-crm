@@ -22,4 +22,8 @@ class Customer extends Model
         'state' => '',
         'zip' => ''
     ];
+
+    public function appointments() {
+        return $this->hasMany('App\Appointment');
+    }
 }

@@ -17,3 +17,5 @@ mix.sass('resources/sass/app.scss', 'public/css')
     processCssUrls: false,
     postCss: [ tailwindcss() ],
   })
+
+mix.version()
