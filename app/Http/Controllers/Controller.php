@@ -26,7 +26,11 @@ class Controller extends BaseController
         $customer = new Customer();
       }
 
-      return view('form', compact('customer'));
+      if (isset($query['output']) && $query['output'] == 'json') {
+        return response()->json($customer);
+      } else {
+        return view('form', compact('customer'));
+      }
     }
 
     public function saveCustomer(Request $request)
