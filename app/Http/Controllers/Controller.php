@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Appointment;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -21,7 +22,7 @@ class Controller extends BaseController
       $query = $request->query();
       if ($query) {
         $where = array_slice($query, 0, 1, true);
-        $customer = Customer::with('appointments')->firstOrNew($where, $query);
+        $customer = Customer::firstOrNew($where, $query);
       } else {
         $customer = new Customer();
       }
@@ -37,16 +38,17 @@ class Controller extends BaseController
     {
       if ($request->get('customer_id')) {
         $customer = Customer::find($request->get('customer_id'));
-        $customer->fill($request->except(['customer_id', '_token', 'appointment_type', 'appointment_date']));
+        $customer->fill($request->except(['customer_id', '_token', 'appointment_type', 'appointment_date', 'appointment_notes']));
         $customer->save();
       } else {
-        $customer = Customer::create($request->except(['appointment_type', 'appointment_date']));
+        $customer = Customer::create($request->except(['appointment_type', 'appointment_date', 'appointment_notes']));
       }
 
       if ($request->get('appointment_date')) {
         $appointment = new Appointment([
           'type' => $request->get('appointment_type'),
-          'date' => new Carbon($request->get('appointment_date'))
+          'date' => new Carbon($request->get('appointment_date')),
+          'notes' => $request->get('appointment_notes') ?? null
         ]);
         $customer->appointments()->save($appointment);
       }

@@ -23,7 +23,9 @@ class Customer extends Model
         'zip' => ''
     ];
 
+    protected $with = ['appointments'];
+
     public function appointments() {
-        return $this->hasMany('App\Appointment');
+        return $this->hasMany('App\Appointment')->orderBy('date', 'ASC');
     }
 }
