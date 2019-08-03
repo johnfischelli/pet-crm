@@ -36,10 +36,10 @@
                 <tbody class="align-baseline">
                   @foreach($customer->appointments as $appointment)
                     <tr>
-                      <td class="p-1 border-t border-pink-500 text-xs text-grey-700 whitespace-no-wrap" width="25%">{{ $appointment->date->format('F jS g:i a') }}</td>
-                      <td class="p-1 border-t border-pink-500 text-xs text-grey-700 whitespace-no-wrap" width="15%">{{ $appointment->type }}</td>
-                      <td class="p-1 border-t border-pink-500 text-xs text-grey-700 whitespace-no-wrap" width="45%">{{ $appointment->notes }}</td>
-                      <td class="p-1 border-t border-pink-500 text-xs text-grey-700 whitespace-no-wrap" width="15%">
+                      <td class="p-1 border-t border-pink-500 text-xs text-grey-700" width="25%">{{ $appointment->date->format('F jS g:i a') }}</td>
+                      <td class="p-1 border-t border-pink-500 text-xs text-grey-700" width="15%">{{ $appointment->type }}</td>
+                      <td class="p-1 border-t border-pink-500 text-xs text-grey-700" width="45%">{{ $appointment->notes }}</td>
+                      <td class="p-1 border-t border-pink-500 text-xs text-grey-700" width="15%">
                         <form method="post" action="{{ route('deleteAppointment') }}">
                           {{ csrf_field() }}
                           <p class="my-3">
